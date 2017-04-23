@@ -14,7 +14,10 @@ export default {
     var width = $(this.$el).width();
     var height = $(this.$el).height();
     var svg = d3.select(this.$el);
-    render(svg, width, height);
+    $.getJSON('static/data/clusters.json', (data) => {
+      render(svg, width, height, data.payload);
+    });
+
   }
 }
 

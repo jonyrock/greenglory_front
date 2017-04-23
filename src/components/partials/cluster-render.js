@@ -1,14 +1,20 @@
 const d3 = require('d3');
+const _ = require('lodash');
 
-export default function(svg, width, height) {
+export default function(svg, width, height, data) {
 
-  var 
+  console.log(data);
+
+  var
       padding = 1.5, // separation between same-color circles
       clusterPadding = 6, // separation between different-color circles
       maxRadius = 12;
 
-  var n = 200, // total number of circles
-      m = 10; // number of distinct clusters
+  var n = 0; // total number of circles
+  for(var i = 0; i < data.length; i++) {
+    n += data[i].els.length;
+  }
+  var m = 10; // number of distinct clusters
 
   var color = d3.scale
       .category10()
@@ -19,7 +25,7 @@ export default function(svg, width, height) {
 
   var nodes = d3.range(n).map(function() {
     var i = Math.floor(Math.random() * m),
-        r = Math.sqrt((i + 1) / m * -Math.log(Math.random())) * maxRadius,
+        r = 3,
         d = {cluster: i, radius: r};
     if (!clusters[i] || (r > clusters[i].radius)) clusters[i] = d;
     return d;
