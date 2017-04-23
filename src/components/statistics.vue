@@ -44,7 +44,7 @@ export default {
         right += e.for;
 
       }
-      this.total = left / (left + right);
+      this.total = right / (left + right);
 
       this.total = ((this.total * 100) + '').substr(0, 5) + '%'
       console.log(this.list);
