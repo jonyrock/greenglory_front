@@ -3,33 +3,35 @@ const _ = require('lodash');
 
 export default function(svg, width, height, data) {
 
-  console.log(data);
+  //console.log(data);
 
   var
       padding = 1.5, // separation between same-color circles
       clusterPadding = 6, // separation between different-color circles
       maxRadius = 12;
 
-  var n = 0; // total number of circles
-  for(var i = 0; i < data.length; i++) {
-    n += data[i].els.length;
-  }
-  var m = 10; // number of distinct clusters
 
+  var m = data.length; // number of distinct clusters
   var color = d3.scale
       .category10()
       .domain(d3.range(m));
 
   // The largest node for each cluster.
   var clusters = new Array(m);
+  var nodes = [];
+  var n = 0; // total number of circles
 
-  var nodes = d3.range(n).map(function() {
-    var i = Math.floor(Math.random() * m),
-        r = 3,
-        d = {cluster: i, radius: r};
-    if (!clusters[i] || (r > clusters[i].radius)) clusters[i] = d;
-    return d;
-  });
+  for(var i = 0; i < data.length; i++) {
+    var els = data[i].els;
+    n += els.length;
+    for(var j = 0; j < els.length; j++) {
+      var d = {cluster: i, radius: 2};
+      nodes.push(d);
+      if (!clusters[i]) {
+        clusters[i] = d;
+      }
+    }
+  }
 
   var force = d3.layout.force()
       .nodes(nodes)
@@ -38,6 +40,7 @@ export default function(svg, width, height, data) {
       .charge(0)
       .on("tick", tick)
       .start();
+
 
   svg
     .attr("width", width)
@@ -57,6 +60,7 @@ export default function(svg, width, height, data) {
         .attr("cx", function(d) { return d.x; })
         .attr("cy", function(d) { return d.y; });
   }
+
 
   // Move d to be adjacent to the cluster node.
   function cluster(alpha) {
