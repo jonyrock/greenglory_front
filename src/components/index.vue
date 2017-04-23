@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row text-center">
       <div class="col-xs-12">
-        <h1>NKO <br> Social Matcher</h1>
+        <h1>NKO<br> Social Matcher</h1>
       </div>
     </div>
     <hr>

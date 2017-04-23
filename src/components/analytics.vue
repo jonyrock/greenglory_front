@@ -5,12 +5,22 @@
         <h1>Analytics</h1>
       </div>
     </div>
-    <hr>
+    <div class="row text-center">
+      <div class="col-xs-12">
+        <h4>Clusters</h4>
+        <clusters />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 
+export default {
+  components: {
+    clusters: require('./partials/clusters')
+  }
+}
 </script>
 
 

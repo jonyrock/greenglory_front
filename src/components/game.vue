@@ -4,7 +4,7 @@
       <loading v-if="loading" />
       <div class="row" id="some" v-if="!loading">
         <div class="col-xs-12 cand-line">
-          <nko :item="candidate.nko" />
+          <nko :item="candidate.npo" />
         </div>
         <sep/>
         <div class="col-xs-12 cand-line">
@@ -24,7 +24,7 @@
 
 const $ = require('jquery');
 
-const HDATA_BASE = 'http://' + location.hostname + ':3006';
+const HDATA_BASE = 'https://vknko-165508.appspot.com';
 const HDATA_RES = HDATA_BASE + '/result';
 const HDATA_SOURCE = HDATA_BASE + '/candidate';
 
