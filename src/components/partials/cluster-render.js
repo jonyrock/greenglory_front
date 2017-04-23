@@ -1,7 +1,7 @@
 const d3 = require('d3');
 const _ = require('lodash');
 
-export default function(svg, width, height, data) {
+export default function(svg, width, height, data, onIn, onOut) {
 
   //console.log(data);
 
@@ -25,7 +25,10 @@ export default function(svg, width, height, data) {
     var els = data[i].els;
     n += els.length;
     for(var j = 0; j < els.length; j++) {
-      var d = {cluster: i, radius: 2};
+      var d = {
+        cluster: i, radius: 2,
+        name: els[j]
+      };
       nodes.push(d);
       if (!clusters[i]) {
         clusters[i] = d;
@@ -58,7 +61,13 @@ export default function(svg, width, height, data) {
         .each(cluster(10 * e.alpha * e.alpha))
         .each(collide(.5))
         .attr("cx", function(d) { return d.x; })
-        .attr("cy", function(d) { return d.y; });
+        .attr("cy", function(d) { return d.y; })
+        .on('mouseover', function(d) {
+          onIn(d);
+    		})
+        .on('mouseout', function(d) {
+          onOut(d);
+        })
   }
 
 
