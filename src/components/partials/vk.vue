@@ -12,7 +12,7 @@
 
     </div>
 
-    <div class="col-xs-4">
+    <div class="col-xs-4 text-right">
       <img
         :src="item.photo"
       />
@@ -29,6 +29,8 @@ export default {
 
 <style>
 img {
-  width: 100%;
+  width: 150px;
+  height: 150px;
+
 }
 </style>
